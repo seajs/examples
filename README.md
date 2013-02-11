@@ -1,4 +1,5 @@
-hello-seajs
-===========
+Examples for SeaJS
+===
 
-An example for SeaJS
+<http://seajs.github.com/examples>
+
