@@ -1,8 +1,5 @@
 
 seajs.config({
-  // Set the base url for SeaJS
-  base: './assets/',
-
   // Set aliases for common libraries
   alias: {
     'jquery': 'common/jquery-1.9.1.min.js'
