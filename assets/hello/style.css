@@ -14,13 +14,15 @@ body {
 #container {
   position: relative;
   margin: 40px 120px;
-  display: none;
+  background: url(https://a248.e.akamai.net/assets.github.com/images/spinners/octocat-spinner-32.gif) no-repeat;
+  min-height: 32px;
 }
 
 #container img {
   position: absolute;
   cursor: pointer;
   opacity: .6;
+  display: none;
 
   -webkit-transition-property: -webkit-transform;
   -moz-transition-property: -moz-transform;

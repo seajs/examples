@@ -14,8 +14,9 @@ define(function(require, exports, module) {
     users: [],
 
     init: function(data) {
-      this.data = data;
+      $('#container').css('background', 'none');
 
+      this.data = data;
       this.users = data.map(function(name) {
         return new User(name, data[name]);
       });

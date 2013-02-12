@@ -12,7 +12,8 @@ define(function(require, exports, module) {
 
   Spinning.prototype.render = function() {
     this._init();
-    this.container.show();
+    this.container.css('background', 'none');
+    this.icons.show();
     this._spin();
   }
 

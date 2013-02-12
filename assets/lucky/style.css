@@ -11,6 +11,7 @@ ul li {
   width: 900px;
   margin: 10px auto;
   position: relative;
+  background: url(https://a248.e.akamai.net/assets.github.com/images/spinners/octocat-spinner-32.gif) no-repeat 45% 25%;
 }
 
 #balls {
