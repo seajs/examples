@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
 
   var $ = require('jquery');
-  require('jquery-easing');
+  require('jquery.easing');
 
   var User = require('./user');
 

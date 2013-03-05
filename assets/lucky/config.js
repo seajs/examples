@@ -9,7 +9,7 @@ seajs.config({
       src: 'lib/jquery-1.9.1.min.js',
       exports: 'jQuery'
     },
-    'jquery-easing': {
+    'jquery.easing': {
       src: 'lib/jquery.easing.1.3.js',
       deps: ['jquery']
     }
