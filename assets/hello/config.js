@@ -1,6 +1,6 @@
 
 seajs.config({
-  // Add plugins
+  // Enable plugins
   plugins: ['shim'],
 
   // Configure shim for non-CMD modules
