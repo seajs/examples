@@ -378,7 +378,7 @@ function addOnload(node, callback, isCSS) {
     if (READY_STATE_RE.test(node.readyState)) {
 
       // Ensure only run once and handle memory leak in IE
-      node.onload = node.onerror = node.onreadystatechange = undefined
+      node.onload = node.onerror = node.onreadystatechange = null
 
       // Remove the script to reduce memory leak
       if (!isCSS && !configData.debug) {
@@ -756,9 +756,8 @@ function exec(mod) {
 }
 
 Module.prototype.destroy = function() {
-  var uri = this.uri
-  delete cachedModules[uri]
-  delete fetchedList[uri]
+  delete cachedModules[this.uri]
+  delete fetchedList[this.uri]
 }
 
 
@@ -892,8 +891,9 @@ var configData = config.data = {
   // Modules that are needed to load before all other modules
   preload: []
 
-  // debug: false - Debug mode
-  // alias - The shorthand alias for module id
+  // debug - Debug mode. The default value is false
+  // alias - An object containing shorthands of module id
+  // paths - An object containing path shorthands in module id
   // vars - The {xxx} variables in module id
   // map - An array containing rules to map module uri
   // plugins - An array containing needed plugins
