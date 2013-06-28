@@ -1,8 +1,25 @@
-Examples for SeaJS
-===
+# Examples for Sea.js
 
-<http://seajs.github.com/examples>
+<http://seajs.github.io/examples>
 
-__注意__
 
-如果你想构建示例，需要使用 [Gruntjs](http://gruntjs.com/) 与 [spm](https://github.com/spmjs/spm/wiki)。
+How to Build
+------------
+
+First, you should install `spm` and `spm-build`:
+
+```
+$ npm install spm -g
+$ npm install spm-build -g
+```
+
+Then, build it:
+
+```
+$ cd static/hello
+$ make build
+$ make deploy
+```
+
+Visit <http://docs.spmjs.org/> for detail information.
+

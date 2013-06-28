@@ -1,5 +1,4 @@
 *.iml
-.idea/
 .ipr
 .iws
 *~
@@ -9,9 +8,8 @@
 *.bak
 .DS_Store
 Thumbs.db
-.svn/
 *.swp
 .nojekyll
 .project
-.settings/
 node_modules
+.*/
