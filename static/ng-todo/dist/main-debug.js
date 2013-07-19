@@ -1,6 +1,6 @@
-define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug" ], function(require) {
-    var ENTER_KEY = 13;
+define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug", "./common-debug" ], function(require) {
     var angular = require("angularjs-debug");
+    var common = require("./common-debug");
     var todo = angular.module("TodoApp", []);
     todo.service("todoService", function() {
         var todos = [];
@@ -33,7 +33,15 @@ define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug" ], function(requ
             }
         };
     });
-    var mainCtrl = todo.controller("MainCtrl", [ "$scope", "todoService", function($scope, todoService) {
+    //TDDO Angular master code has been implemented
+    todo.directive("ngBlur", function() {
+        return function(scope, elem, attrs) {
+            elem.bind("blur", function() {
+                scope.$apply(attrs.ngBlur);
+            });
+        };
+    });
+    todo.controller("MainCtrl", [ "$scope", "todoService", function($scope, todoService) {
         $scope.todoService = todoService;
         $scope.title = "todo";
         $scope.todos = todoService.getTodos();
@@ -47,7 +55,7 @@ define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug" ], function(requ
             this.hidden = e.target.checked;
         };
         $scope.createOnEnter = function(e) {
-            if (e.which !== ENTER_KEY || !this.newTodo.trim()) {
+            if (e.which !== common.ENTER_KEY || !this.newTodo.trim()) {
                 return;
             }
             this.todoService.addTodo(this.newTodo);
@@ -84,4 +92,12 @@ define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug" ], function(requ
         };
     } ]);
     angular.bootstrap(document.body, [ "TodoApp" ]);
+});
+
+define("examples/ng-todo/1.0.0/common-debug", [], {
+    // Which filter are we using?
+    TodoFilter: "",
+    // empty, active, completed
+    // What is the enter key constant?
+    ENTER_KEY: 13
 });

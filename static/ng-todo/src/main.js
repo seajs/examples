@@ -1,6 +1,6 @@
 define(function(require){
-  var ENTER_KEY = 13
   var angular = require('angularjs')
+  var common = require('./common')
   var todo = angular.module('TodoApp', [])
 
   todo.service('todoService', function() {
@@ -39,7 +39,16 @@ define(function(require){
     }
   })
 
-  var mainCtrl = todo.controller('MainCtrl', ['$scope', 'todoService', function($scope, todoService) {
+  //TDDO Angular master code has been implemented
+  todo.directive('ngBlur', function() {
+    return function( scope, elem, attrs ) {
+      elem.bind('blur', function() {
+        scope.$apply(attrs.ngBlur)
+      })
+    }
+  })
+
+  todo.controller('MainCtrl', ['$scope', 'todoService', function($scope, todoService) {
     $scope.todoService = todoService
     $scope.title = 'todo'
     $scope.todos = todoService.getTodos()
@@ -53,7 +62,7 @@ define(function(require){
     }
 
     $scope.createOnEnter = function(e) {
-        if (e.which !== ENTER_KEY || !this.newTodo.trim()) {
+        if (e.which !== common.ENTER_KEY || !this.newTodo.trim()) {
           return
         }
 
