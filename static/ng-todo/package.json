@@ -6,7 +6,7 @@
   "spm": {
     "alias": {
       "$": "$",
-      "store": "gallery/store/1.3.7/store",
+      "store": "store",
       "angularjs": "angularjs"
     },
     "output": ["main.js", "base.css", "bg.png"]
