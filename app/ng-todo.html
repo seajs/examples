@@ -64,11 +64,15 @@
 
   // For development
   if (location.href.indexOf("?dev") > 0) {
-    seajs.use("../static/ng-todo/src/main");
+    seajs.use("../static/ng-todo/src/main", function(main) {
+      main.init()
+    });
   }
   // For production
   else {
-    seajs.use("examples/ng-todo/1.0.0/main");
+    seajs.use("examples/ng-todo/1.0.0/main", function(main) {
+      main.init()
+    });
   }
 </script>
 

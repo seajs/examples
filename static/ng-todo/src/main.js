@@ -107,5 +107,10 @@ define(function(require){
     }
   }])
 
-  angular.bootstrap(document.body, ['TodoApp'])
+  return {
+    init: function() {
+      angular.bootstrap(document.body, ['TodoApp'])
+    }
+  }
+
 })
