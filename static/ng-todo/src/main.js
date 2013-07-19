@@ -39,7 +39,7 @@ define(function(require){
     }
   })
 
-  todo.controller('MainCtrl', function($scope, todoService) {
+  var mainCtrl = todo.controller('MainCtrl', ['$scope', 'todoService', function($scope, todoService) {
     $scope.todoService = todoService
     $scope.title = 'todo'
     $scope.todos = todoService.getTodos()
@@ -96,7 +96,7 @@ define(function(require){
     $scope.close = function(todo) {
       todo.edit= false
     }
-  })
+  }])
 
   angular.bootstrap(document.body, ['TodoApp'])
 })

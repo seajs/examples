@@ -33,7 +33,7 @@ define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug" ], function(requ
             }
         };
     });
-    todo.controller("MainCtrl", function($scope, todoService) {
+    var mainCtrl = todo.controller("MainCtrl", [ "$scope", "todoService", function($scope, todoService) {
         $scope.todoService = todoService;
         $scope.title = "todo";
         $scope.todos = todoService.getTodos();
@@ -82,6 +82,6 @@ define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug" ], function(requ
         $scope.close = function(todo) {
             todo.edit = false;
         };
-    });
+    } ]);
     angular.bootstrap(document.body, [ "TodoApp" ]);
 });
