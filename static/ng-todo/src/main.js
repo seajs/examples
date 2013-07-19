@@ -1,10 +1,17 @@
 define(function(require){
   var angular = require('angularjs')
   var common = require('./common')
+  var store = require('store')
+
   var todo = angular.module('TodoApp', [])
 
   todo.service('todoService', function() {
     var todos = []
+
+    if( store.enabled ) {
+      console.log("localStorage is available");
+      todos = store.get('todos') || store.set('todos', todos)
+    }
 
     return {
       getTodos: function(filter) {
@@ -35,6 +42,9 @@ define(function(require){
             this.delTodo(i)
           }
         }
+      },
+      store: function() {
+        store.set('todos', todos)
       }
     }
   })
@@ -80,6 +90,8 @@ define(function(require){
         })
         $scope.remaining = remaining
         $scope.completed = $scope.todos.length - remaining
+
+        $scope.todoService.store()
       }, true)
 
     $scope.filter = function(val) {

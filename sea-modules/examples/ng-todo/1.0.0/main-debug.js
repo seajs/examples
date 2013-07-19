@@ -1,9 +1,14 @@
-define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug", "./common-debug" ], function(require) {
+define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug", "./common-debug", "store-debug" ], function(require) {
     var angular = require("angularjs-debug");
     var common = require("./common-debug");
+    var store = require("store-debug");
     var todo = angular.module("TodoApp", []);
     todo.service("todoService", function() {
         var todos = [];
+        if (store.enabled) {
+            console.log("localStorage is available");
+            todos = store.get("todos") || store.set("todos", todos);
+        }
         return {
             getTodos: function(filter) {
                 if (filter) {
@@ -30,6 +35,9 @@ define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug", "./common-debug
                         this.delTodo(i);
                     }
                 }
+            },
+            store: function() {
+                store.set("todos", todos);
             }
         };
     });
@@ -70,6 +78,7 @@ define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug", "./common-debug
             });
             $scope.remaining = remaining;
             $scope.completed = $scope.todos.length - remaining;
+            $scope.todoService.store();
         }, true);
         $scope.filter = function(val) {
             this.activeFilter.completed = val;
@@ -91,7 +100,11 @@ define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug", "./common-debug
             todo.edit = false;
         };
     } ]);
-    angular.bootstrap(document.body, [ "TodoApp" ]);
+    return {
+        init: function() {
+            angular.bootstrap(document.body, [ "TodoApp" ]);
+        }
+    };
 });
 
 define("examples/ng-todo/1.0.0/common-debug", [], {
