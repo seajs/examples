@@ -9,7 +9,7 @@
 <body>
 <section id="todoapp" ng-controller="MainCtrl">
     <header id="header">
-      <h1>{{title}}</h1>
+      <h1 ng-bind="title"></h1>
         <input id="new-todo" ng-model="newTodo" ng-keypress="createOnEnter($event)" placeholder="What needs to be done?" autofocus>
     </header>
     <section id="main">
@@ -20,7 +20,7 @@
           hidden: hidden}'>
             <div class="view">
               <input class="toggle" type="checkbox" ng-model="todo.completed">
-              <label ng-dblclick="edit(todo, $event)">{{todo.title}}</label>
+              <label ng-dblclick="edit(todo, $event)" ng-bind="todo.title"></label>
               <button class="destroy" ng-click="todoService.delTodo($index)"></button>
             </div>
             <input ng-blur="close(todo)" class="edit" ng-model="todo.title">
@@ -28,7 +28,7 @@
         </ul>
     </section>
     <footer id="footer">
-      <span id="todo-count"><strong>{{remaining}}</strong> {{remaining < 1 ? 'item' : 'items'}} left</span>
+        <span id="todo-count"><strong ng-bind="remaining"></strong> <span ng-bind-template="{{remaining < 1 ? 'item' : 'items'}} left"></span></span>
      <ul id="filters">
         <li>
         <a ng-class="{selected: selected('')}" href="#/" ng-click="filter('')">All</a>
@@ -40,7 +40,7 @@
             <a ng-class="{selected: selected(true)}" href="#/" ng-click="filter(true)">Completed</a>
         </li>
     </ul>
-    <button ng-show="remaining" id="clear-completed" ng-click="todoService.clearCompleted()">Clear completed ({{completed}})</button>
+    <button ng-show="remaining" id="clear-completed" ng-click="todoService.clearCompleted()" ng-bind-template="Clear completed ({{completed}})"></button>
     </footer>
 </section>
 <footer id="info">
