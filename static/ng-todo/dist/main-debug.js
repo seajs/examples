@@ -1,46 +1,9 @@
-define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug", "./common-debug", "store-debug" ], function(require) {
+define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug", "./common-debug", "./service-debug", "store-debug" ], function(require) {
     var angular = require("angularjs-debug");
     var common = require("./common-debug");
-    var store = require("store-debug");
+    var todoService = require("./service-debug");
     var todo = angular.module("TodoApp", []);
-    todo.service("todoService", function() {
-        var todos = [];
-        if (store.enabled) {
-            console.log("localStorage is available");
-            todos = store.get("todos") || store.set("todos", todos);
-        }
-        return {
-            getTodos: function(filter) {
-                if (filter) {
-                    return todos.filter(function(todo) {
-                        if (filter.completed === "") return true;
-                        return todo.completed === filter.completed;
-                    });
-                } else {
-                    return todos;
-                }
-            },
-            addTodo: function(todo) {
-                todos.push({
-                    title: todo,
-                    completed: false
-                });
-            },
-            delTodo: function(index) {
-                todos.splice(index, 1);
-            },
-            clearCompleted: function() {
-                for (var i = todos.length - 1; i > -1; i--) {
-                    if (todos[i].completed) {
-                        this.delTodo(i);
-                    }
-                }
-            },
-            store: function() {
-                store.set("todos", todos);
-            }
-        };
-    });
+    todo.service("todoService", todoService);
     //TDDO Angular master code has been implemented
     todo.directive("ngBlur", function() {
         return function(scope, elem, attrs) {
@@ -60,7 +23,7 @@ define("examples/ng-todo/1.0.0/main-debug", [ "angularjs-debug", "./common-debug
         $scope.remaining = 0;
         $scope.hidden = false;
         $scope.toggleAll = function(e) {
-            this.hidden = e.target.checked;
+            this.hidden = !this.hidden;
         };
         $scope.createOnEnter = function(e) {
             if (e.which !== common.ENTER_KEY || !this.newTodo.trim()) {
@@ -113,4 +76,46 @@ define("examples/ng-todo/1.0.0/common-debug", [], {
     // empty, active, completed
     // What is the enter key constant?
     ENTER_KEY: 13
+});
+
+define("examples/ng-todo/1.0.0/service-debug", [ "store-debug" ], function(require, exports, module) {
+    var store = require("store-debug");
+    module.exports = function() {
+        var todos = [];
+        if (store.enabled) {
+            console.log("localStorage is available");
+            todos = store.get("todos") || store.set("todos", todos);
+        }
+        return {
+            getTodos: function(filter) {
+                if (filter) {
+                    return todos.filter(function(todo) {
+                        if (filter.completed === "") return true;
+                        return todo.completed === filter.completed;
+                    });
+                } else {
+                    return todos;
+                }
+            },
+            addTodo: function(todo) {
+                todos.push({
+                    title: todo,
+                    completed: false
+                });
+            },
+            delTodo: function(index) {
+                todos.splice(index, 1);
+            },
+            clearCompleted: function() {
+                for (var i = todos.length - 1; i > -1; i--) {
+                    if (todos[i].completed) {
+                        this.delTodo(i);
+                    }
+                }
+            },
+            store: function() {
+                store.set("todos", todos);
+            }
+        };
+    };
 });

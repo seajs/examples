@@ -1,53 +1,11 @@
 define(function(require){
   var angular = require('angularjs')
   var common = require('./common')
-  var store = require('store')
+  var todoService = require('./service')
 
   var todo = angular.module('TodoApp', [])
 
-  todo.service('todoService', function() {
-    var todos = []
-
-    if( store.enabled ) {
-      console.log("localStorage is available");
-      todos = store.get('todos') || store.set('todos', todos)
-    }
-
-    return {
-      getTodos: function(filter) {
-        if (filter) {
-          return todos.filter(function(todo) {
-            if (filter.completed === '') return true
-            return todo.completed === filter.completed
-          })
-        } else {
-          return todos
-        }
-      },
-
-      addTodo: function(todo) {
-        todos.push({
-          title: todo,
-          completed: false
-        })
-      },
-
-      delTodo: function(index) {
-        todos.splice(index, 1)
-      },
-
-      clearCompleted: function() {
-        for (var i = todos.length - 1; i > -1; i--) {
-          if (todos[i].completed) {
-            this.delTodo(i)
-          }
-        }
-      },
-      store: function() {
-        store.set('todos', todos)
-      }
-    }
-  })
+  todo.service('todoService', todoService)
 
   //TDDO Angular master code has been implemented
   todo.directive('ngBlur', function() {
@@ -68,7 +26,7 @@ define(function(require){
     $scope.hidden = false
 
     $scope.toggleAll = function(e) {
-      this.hidden = e.target.checked
+      this.hidden = !this.hidden
     }
 
     $scope.createOnEnter = function(e) {
