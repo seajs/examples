@@ -8,7 +8,6 @@ define(function(require, exports, module) {
   var HIT_SPEED = 100;
   var RIGIDITY = 4;
 
-
   module.exports = {
 
     users: [],

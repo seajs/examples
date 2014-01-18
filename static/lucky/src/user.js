@@ -5,10 +5,10 @@ define(function(require, exports, module) {
   var CANVAS_HEIGHT = 500;
   var CANVAS_WIDTH = 900;
 
-  var BALL_WIDTH = 60;
-  var BALL_HEIGHT = 60;
-  var LUCKY_BALL_WIDTH = 200;
-  var LUCKY_BALL_HEIGHT = 200;
+  var BALL_WIDTH = 40;
+  var BALL_HEIGHT = 40;
+  var LUCKY_BALL_WIDTH = 120;
+  var LUCKY_BALL_HEIGHT = 120;
   var MAX_ZINDEX = 100;
 
   var DURATION_MIN = 100;
