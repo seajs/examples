@@ -9,7 +9,7 @@ How to Build
 First, you should install `spm` and `spm-build`:
 
 ```
-$ npm install spm -g
+$ npm install spm@2.x -g
 $ npm install spm-build -g
 ```
 
