@@ -63,8 +63,7 @@ define(function(require, exports, module) {
           var user = that.users[i];
 
           if (user.name === name) {
-            that.moveLucky();
-            if (that.luckyUser !== user) {
+            if (!that.moveLucky() && that.luckyUser !== user) {
               that.setLucky(user);
             }
             break;
@@ -131,6 +130,9 @@ define(function(require, exports, module) {
         luckyUser.el.prependTo('#lucky-balls');
         this.removeItem(luckyUser);
         this.luckyUser = null;
+        return true;
+      }else{
+        return false;
       }
     },
 
