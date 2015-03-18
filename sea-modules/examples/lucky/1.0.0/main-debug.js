@@ -58,8 +58,7 @@ define("examples/lucky/1.0.0/lucky-debug", [ "jquery-debug", "jquery-easing-debu
                 for (var i = 0; i < that.users.length; i++) {
                     var user = that.users[i];
                     if (user.name === name) {
-                        that.moveLucky();
-                        if (that.luckyUser !== user) {
+                        if (!that.moveLucky() && that.luckyUser !== user) {
                             that.setLucky(user);
                         }
                         break;
@@ -115,6 +114,9 @@ define("examples/lucky/1.0.0/lucky-debug", [ "jquery-debug", "jquery-easing-debu
                 luckyUser.el.prependTo("#lucky-balls");
                 this.removeItem(luckyUser);
                 this.luckyUser = null;
+                return true;
+            } else {
+                return false;
             }
         },
         setLucky: function(item) {
