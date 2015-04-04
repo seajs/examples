@@ -48,7 +48,9 @@ define("examples/lucky/1.0.0/lucky-debug", [ "jquery-debug", "jquery-easing-debu
                 var el = $(e.target);
                 var name = el.text();
                 that.addItem(name);
-                that.hit();
+                if (trigger.getAttribute("data-action") === "start") {
+                    that.hit();
+                }
                 el.remove();
             });
             // bind #balls
@@ -59,6 +61,8 @@ define("examples/lucky/1.0.0/lucky-debug", [ "jquery-debug", "jquery-easing-debu
                     var user = that.users[i];
                     if (user.name === name) {
                         if (!that.moveLucky() && that.luckyUser !== user) {
+                            trigger.setAttribute("data-action", "start");
+                            trigger.innerHTML = trigger.getAttribute("data-text-start");
                             that.setLucky(user);
                         }
                         break;
@@ -146,6 +150,7 @@ define("examples/lucky/1.0.0/lucky-debug", [ "jquery-debug", "jquery-easing-debu
                 user.hitMove();
             });
             if (hitCount > 0) {
+                this.timer && clearTimeout(this.timer);
                 this.timer = setTimeout(function() {
                     that.hit();
                 }, HIT_SPEED);
