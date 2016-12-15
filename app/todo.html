@@ -34,7 +34,7 @@
     <input class="edit" value="<%- title %>">
 </script>
 <script type="text/template" id="stats-template">
-    <span id="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
+    <span id="todo-count"><strong><%= remaining %></strong> <%= remaining <= 1 ? 'item' : 'items' %> left</span>
     <ul id="filters">
         <li>
             <a class="selected" href="#/">All</a>
@@ -54,24 +54,24 @@
 <script src="../sea-modules/seajs/seajs/2.2.0/sea.js"></script>
 <script>
 
-  // Set configuration
-  seajs.config({
-    base: "../sea-modules/",
-    alias: {
-      "$": "jquery/jquery/1.10.1/jquery.js",
-      "underscore": "gallery/underscore/1.4.4/underscore.js",
-      "backbone": "gallery/backbone/1.0.0/backbone.js"
-    }
-  });
+    // Set configuration
+    seajs.config({
+        base: "../sea-modules/",
+        alias: {
+            "$": "jquery/jquery/1.10.1/jquery.js",
+            "underscore": "gallery/underscore/1.4.4/underscore.js",
+            "backbone": "gallery/backbone/1.0.0/backbone.js"
+        }
+    });
 
-  // For development
-  if (location.href.indexOf("?dev") > 0) {
-    seajs.use("../static/todo/src/main");
-  }
-  // For production
-  else {
-    seajs.use("examples/todo/1.0.0/main");
-  }
+    // For development
+    if (location.href.indexOf("?dev") > 0) {
+        seajs.use("../static/todo/src/main");
+    }
+    // For production
+    else {
+        seajs.use("examples/todo/1.0.0/main");
+    }
 </script>
 
 </body>
