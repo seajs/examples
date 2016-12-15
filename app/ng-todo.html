@@ -27,7 +27,7 @@
         </ul>
     </section>
     <footer id="footer">
-        <span id="todo-count"><strong ng-bind="remaining"></strong> <span ng-bind-template="{{remaining < 1 ? 'item' : 'items'}} left"></span></span>
+        <span id="todo-count"><strong ng-bind="remaining"></strong> <span ng-bind-template="{{remaining < 2 ? 'item' : 'items'}} left"></span></span>
      <ul id="filters">
         <li>
         <a ng-class="{selected: selected('')}" href="#/" ng-click="filter('')">All</a>
